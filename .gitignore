@@ -17,3 +17,7 @@
 
 # asdf
 .tool-versions
+
+# My private stuff
+/.private
+/scripts/
