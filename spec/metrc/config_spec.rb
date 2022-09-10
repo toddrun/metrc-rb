@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Metrc do
+RSpec.describe Metrc::Config do
   subject { Metrc::Config.new }
 
   let(:user_key) { "uuu-123" }

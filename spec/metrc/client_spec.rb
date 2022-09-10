@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Metrc do
+RSpec.describe Metrc::Client do
   subject { SubclassedMetrc.new(config, endpoint) }
 
   let(:config) do
@@ -19,7 +19,7 @@ RSpec.describe Metrc do
   let(:endpoint) { '/some/path' }
   let(:expected_response) { "{total: 'success'}" }
 
-  class SubclassedMetrc < Metrc
+  class SubclassedMetrc < Metrc::Client
     def initialize(config, endpoint)
       super(config)
       @endpoint = endpoint
@@ -35,7 +35,7 @@ RSpec.describe Metrc do
   end
 
   it "exists" do
-    expect(Metrc.new).to be_a(Metrc)
+    expect(Metrc::Client.new).to be_a(Metrc::Client)
   end
 
   describe "get" do
