@@ -2,6 +2,7 @@
 
 require "faraday"
 require "base64"
+require "json"
 
 class Metrc
   class Client
@@ -16,7 +17,8 @@ class Metrc
     end
 
     def get(base, params = {})
-      client.get(build_url(base), build_params(params), headers)
+      response = client.get(build_url(base), build_params(params), headers)
+      JSON.parse(response.body)
     end
 
     private

@@ -2,14 +2,9 @@ require "spec_helper"
 
 RSpec.describe Metrc::Labtests do
   let(:response_body) { "some response" }
-  let(:response) do
-    instance_double(Faraday::Response, body: response_body)
-  end
   let(:client) do
-    instance_double(Metrc::Client, get: response)
+    instance_double(Metrc::Client, get: response_body)
   end
-
-  before { allow(client).to receive(:get).and_return(response) }
 
   describe "states" do
     subject { Metrc::Labtests.states(client) }

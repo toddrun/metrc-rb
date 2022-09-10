@@ -17,7 +17,8 @@ RSpec.describe Metrc::Client do
   let(:license_number) { 'ABC-X000X' }
 
   let(:endpoint) { '/some/path' }
-  let(:expected_response) { "{total: 'success'}" }
+  let(:response_body) { '{"total": "success"}' }
+  let(:expected_response) { JSON.parse(response_body) }
 
   class SubclassedMetrc < Metrc::Client
     def initialize(config, endpoint)
@@ -49,9 +50,9 @@ RSpec.describe Metrc::Client do
             "Accept" => "application/json"
           }
         )
-        .to_return(body: expected_response)
+        .to_return(body: response_body)
 
-      expect(subject.fetch.body).to eq expected_response
+      expect(subject.fetch).to eq(expected_response)
     end
 
     it "allows adding additional params" do
@@ -63,9 +64,9 @@ RSpec.describe Metrc::Client do
             two: 2
           },
         )
-        .to_return(body: expected_response)
+        .to_return(body: response_body)
 
-      expect(subject.fecth_with_params.body).to eq(expected_response)
+      expect(subject.fecth_with_params).to eq(expected_response)
     end
   end
 end

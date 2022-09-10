@@ -15,11 +15,11 @@ class Metrc
     end
 
     def states
-      metrc_client.get("/labtests/v1/states").body
+      metrc_client.get("/labtests/v1/states")
     end
 
     def types
-      metrc_client.get("/labtests/v1/types").body
+      metrc_client.get("/labtests/v1/types")
     end
   end
 end
