@@ -11,14 +11,6 @@ RSpec.describe Metrc::Packages do
   describe "types" do
     subject { Metrc::Packages.types(client) }
 
-    it "gets types" do
-      expect(client).to receive(:get).with('/packages/v1/types')
-
-      subject
-    end
-
-    it "returns the body of the response" do
-      expect(subject).to eq response_body
-    end
+    it_behaves_like "simple get request", "/packages/v1/types"
   end
 end

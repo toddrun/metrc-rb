@@ -11,28 +11,12 @@ RSpec.describe Metrc::Labtests do
   describe "states" do
     subject { Metrc::Labtests.states(client) }
 
-    it "gets states" do
-      expect(client).to receive(:get).with('/labtests/v1/states')
-
-      subject
-    end
-
-    it "returns the body of the response" do
-      expect(subject).to eq response_body
-    end
+    it_behaves_like "simple get request", "/labtests/v1/states"
   end
 
   describe "types" do
     subject { Metrc::Labtests.types(client) }
 
-    it "gets types" do
-      expect(client).to receive(:get).with('/labtests/v1/types')
-
-      subject
-    end
-
-    it "returns the body of the response" do
-      expect(subject).to eq response_body
-    end
+    it_behaves_like "simple get request", "/labtests/v1/types"
   end
 end

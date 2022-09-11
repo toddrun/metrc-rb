@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "webmock/rspec"
 require "pry"
+require_relative "./context"
 
 RSpec.configure do |config|
   Dir[File.join(__dir__, '..', 'lib', '*.rb')].each { |file| require file }
