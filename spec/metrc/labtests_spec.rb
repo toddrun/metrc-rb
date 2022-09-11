@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Metrc::Labtests do
@@ -23,7 +25,7 @@ RSpec.describe Metrc::Labtests do
   describe "types" do
     subject { Metrc::Labtests.types(client) }
 
-    it "gets states" do
+    it "gets types" do
       expect(client).to receive(:get).with('/labtests/v1/types')
 
       subject
