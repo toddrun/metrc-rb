@@ -9,14 +9,14 @@ RSpec.describe Metrc::Labtests do
   end
 
   describe "states" do
-    subject { Metrc::Labtests.states(client) }
+    subject { Metrc::Labtests.states(client: client) }
 
-    it_behaves_like "simple get request", "/labtests/v1/states"
+    it_behaves_like "a simple get request", "/labtests/v1/states"
   end
 
   describe "types" do
-    subject { Metrc::Labtests.types(client) }
+    subject { Metrc::Labtests.types(client: client) }
 
-    it_behaves_like "simple get request", "/labtests/v1/types"
+    it_behaves_like "a simple get request", "/labtests/v1/types"
   end
 end
