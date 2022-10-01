@@ -28,9 +28,10 @@ RSpec.describe Metrc::DateCalculator do
   end
 
   context "with a positive integer argument" do
-    let(:three_days_ago) { today - (day_in_seconds * 3) }
-    let(:fourty_five_days_ago) { today - (day_in_seconds) * 45 }
+    let(:expected_date) { today - (day_in_seconds * 3) }
 
-    it "returns "
+    it "returns expected values" do
+      expect(calculator.days_ago(3)).to include expected_portion
+    end
   end
 end
