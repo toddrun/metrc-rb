@@ -1,25 +1,25 @@
 class Metrc
   class Labtests
-    def self.states(metrc_client = nil)
-      new(metrc_client).states
+    def self.states(client: nil)
+      new(client).states
     end
 
-    def self.types(metrc_client = nil)
-      new(metrc_client).types
+    def self.types(client: nil)
+      new(client).types
     end
 
-    attr_reader :metrc_client
+    attr_reader :client
 
-    def initialize(metrc_client = nil)
-      @metrc_client = metrc_client || Metrc::Client.new
+    def initialize(client = nil)
+      @client = client || Metrc::Client.new
     end
 
     def states
-      metrc_client.get("/labtests/v1/states")
+      client.get("/labtests/v1/states")
     end
 
     def types
-      metrc_client.get("/labtests/v1/types")
+      client.get("/labtests/v1/types")
     end
   end
 end

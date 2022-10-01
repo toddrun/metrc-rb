@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Metrc::Labtests do
@@ -7,30 +9,14 @@ RSpec.describe Metrc::Labtests do
   end
 
   describe "states" do
-    subject { Metrc::Labtests.states(client) }
+    subject { Metrc::Labtests.states(client: client) }
 
-    it "gets states" do
-      expect(client).to receive(:get).with('/labtests/v1/states')
-
-      subject
-    end
-
-    it "returns the body of the response" do
-      expect(subject).to eq response_body
-    end
+    it_behaves_like "a simple get request", "/labtests/v1/states"
   end
 
   describe "types" do
-    subject { Metrc::Labtests.types(client) }
+    subject { Metrc::Labtests.types(client: client) }
 
-    it "gets states" do
-      expect(client).to receive(:get).with('/labtests/v1/types')
-
-      subject
-    end
-
-    it "returns the body of the response" do
-      expect(subject).to eq response_body
-    end
+    it_behaves_like "a simple get request", "/labtests/v1/types"
   end
 end
