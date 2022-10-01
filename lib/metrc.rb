@@ -5,5 +5,5 @@ require "metrc/packages"
 require "metrc/date_calculator"
 
 class Metrc
-
+  class NoStartDateException < StandardError; end
 end
