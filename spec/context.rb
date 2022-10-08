@@ -19,7 +19,7 @@ RSpec.shared_examples "a simple get request" do |endpoint|
   end
 end
 
-RSpec.shared_examples "a get request with param" do |endpoint|
+RSpec.shared_examples "a get request with params" do |endpoint|
   include_context "with metrc client"
 
   it "returns the body of the response" do

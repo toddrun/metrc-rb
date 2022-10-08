@@ -8,6 +8,10 @@ class Metrc
       new(client).types
     end
 
+    def self.results(client: nil, package_id: nil)
+      new(client).results(package_id)
+    end
+
     attr_reader :client
 
     def initialize(client = nil)
@@ -20,6 +24,12 @@ class Metrc
 
     def types
       client.get("/labtests/v1/types")
+    end
+
+    def results(package_id = nil)
+      return client.get("/labtests/v1/results") if package_id.nil?
+
+      client.get("/labtests/v1/results", { package_id: package_id} )
     end
   end
 end

@@ -19,4 +19,21 @@ RSpec.describe Metrc::Labtests do
 
     it_behaves_like "a simple get request", "/labtests/v1/types"
   end
+
+  describe "results" do
+    context "without a package_id" do
+      subject { Metrc::Labtests.results(client: client) }
+
+      it_behaves_like "a simple get request", "/labtests/v1/results"
+    end
+
+    context "with a package_id" do
+      subject { Metrc::Labtests.results(client: client, package_id: package_id) }
+
+      let(:package_id) { 'some-package-id' }
+      let(:params) { { package_id: package_id } }
+
+      it_behaves_like "a get request with params", "/labtests/v1/results"
+    end
+  end
 end
