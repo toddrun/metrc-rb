@@ -30,8 +30,12 @@ RSpec.describe Metrc::Client do
       get(@endpoint)
     end
 
-    def fecth_with_params
+    def fetch_with_params
       get(@endpoint, {one: 1, two: 2})
+    end
+
+    def create(payload)
+      post(@endpoint, payload)
     end
   end
 
@@ -66,7 +70,28 @@ RSpec.describe Metrc::Client do
         )
         .to_return(body: response_body)
 
-      expect(subject.fecth_with_params).to eq(expected_response)
+      expect(subject.fetch_with_params).to eq(expected_response)
+    end
+  end
+
+  describe "post" do
+    let(:payload) { { some: 'data' } }
+    let(:status) { 200 }
+
+    it "assembles http request correctly" do
+      stub_request(:post, domain + endpoint)
+        .with(
+          query: {licenseNumber: license_number},
+          body: payload,
+          basic_auth: [user_key, vendor_key],
+          headers: {
+            "Content-Type" => "application/json",
+            "Accept" => "application/json"
+          }
+        )
+        .to_return(status: status)
+
+      expect(subject.create(payload)).to eq(status)
     end
   end
 end
