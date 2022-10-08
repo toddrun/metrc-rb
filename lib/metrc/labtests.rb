@@ -12,6 +12,10 @@ class Metrc
       new(client).results(package_id)
     end
 
+    def self.record(client: nil, body:)
+      new(client).record(body)
+    end
+
     attr_reader :client
 
     def initialize(client = nil)
@@ -30,6 +34,10 @@ class Metrc
       return client.get("/labtests/v1/results") if package_id.nil?
 
       client.get("/labtests/v1/results", { package_id: package_id} )
+    end
+
+    def record(body)
+      client.post("/labtests/v1/record", body)
     end
   end
 end

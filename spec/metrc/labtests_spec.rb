@@ -4,8 +4,9 @@ require "spec_helper"
 
 RSpec.describe Metrc::Labtests do
   let(:response_body) { "some response" }
+  let(:response_status) { 200 }
   let(:client) do
-    instance_double(Metrc::Client, get: response_body)
+    instance_double(Metrc::Client, get: response_body, post: response_status)
   end
 
   describe "states" do
@@ -35,5 +36,14 @@ RSpec.describe Metrc::Labtests do
 
       it_behaves_like "a get request with params", "/labtests/v1/results"
     end
+  end
+
+  describe "record" do
+    subject { Metrc::Labtests.record(client: client, body: body) }
+
+    let(:package_id) { 'some-package-id' }
+    let(:body) { { package_id: package_id } }
+
+    it_behaves_like "a post request", "/labtests/v1/record"
   end
 end
