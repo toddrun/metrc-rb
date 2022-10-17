@@ -31,6 +31,16 @@ class Metrc
       response.status
     end
 
+    def put(base, body)
+      response = client.put(build_url(base)) do |req|
+        req.params = build_params({})
+        req.headers =  headers
+        req.body = body.to_json
+      end
+
+      response.status
+    end
+
     private
 
     def build_url(path)

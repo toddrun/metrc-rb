@@ -37,6 +37,10 @@ RSpec.describe Metrc::Client do
     def create(payload)
       post(@endpoint, payload)
     end
+
+    def update(payload)
+      put(@endpoint, payload)
+    end
   end
 
   it "exists" do
@@ -92,6 +96,27 @@ RSpec.describe Metrc::Client do
         .to_return(status: status)
 
       expect(subject.create(payload)).to eq(status)
+    end
+  end
+
+  describe "put" do
+    let(:payload) { { some: 'data' } }
+    let(:status) { 200 }
+
+    it "assembles http request correctly" do
+      stub_request(:put, domain + endpoint)
+        .with(
+          query: {licenseNumber: license_number},
+          body: payload,
+          basic_auth: [user_key, vendor_key],
+          headers: {
+            "Content-Type" => "application/json",
+            "Accept" => "application/json"
+          }
+        )
+        .to_return(status: status)
+
+      expect(subject.update(payload)).to eq(status)
     end
   end
 end
