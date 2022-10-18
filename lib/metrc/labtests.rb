@@ -25,6 +25,10 @@ class Metrc
       new(client).labtestdocument(lab_test_result_id, file_name, encoded_file)
     end
 
+    def self.release(package_label:, client: nil)
+      new(client).release(package_label)
+    end
+
     attr_reader :client
 
     def initialize(client = nil)
@@ -55,6 +59,12 @@ class Metrc
       }
 
       client.put("/labtests/v1/labtestdocument", body)
+    end
+
+    def release(package_label)
+      body = { PackageLabel: package_label}
+
+      client.put("/labtests/v1/results/release", body)
     end
   end
 end

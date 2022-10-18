@@ -68,4 +68,18 @@ RSpec.describe Metrc::Labtests do
 
     it_behaves_like "a put request", "/labtests/v1/labtestdocument"
   end
+
+  describe "release" do
+    subject do
+      Metrc::Labtests.release(
+        client: client,
+        package_label: package_label
+      )
+    end
+
+    let(:package_label) { "some-id" }
+    let(:body) { { PackageLabel: package_label } }
+
+    it_behaves_like "a put request", "/labtests/v1/results/release"
+  end
 end
