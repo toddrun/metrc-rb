@@ -8,6 +8,27 @@ class Metrc
       new(client).types
     end
 
+    def self.results(package_id:, client: nil)
+      new(client).results(package_id)
+    end
+
+    def self.record(body: , client: nil)
+      new(client).record(body)
+    end
+
+    def self.labtestdocument(
+      lab_test_result_id:,
+      file_name:,
+      encoded_file:,
+      client: nil
+    )
+      new(client).labtestdocument(lab_test_result_id, file_name, encoded_file)
+    end
+
+    def self.release(package_label:, client: nil)
+      new(client).release(package_label)
+    end
+
     attr_reader :client
 
     def initialize(client = nil)
@@ -20,6 +41,30 @@ class Metrc
 
     def types
       client.get("/labtests/v1/types")
+    end
+
+    def results(package_id)
+      client.get("/labtests/v1/results", { packageId: package_id} )
+    end
+
+    def record(body)
+      client.post("/labtests/v1/record", body)
+    end
+
+    def labtestdocument(lab_test_result_id, file_name, encoded_file)
+      body = {
+        LabTestResultId: lab_test_result_id,
+        DocumentFileName: file_name,
+        DocumentFileBase64: encoded_file
+      }
+
+      client.put("/labtests/v1/labtestdocument", body)
+    end
+
+    def release(package_label)
+      body = { PackageLabel: package_label}
+
+      client.put("/labtests/v1/results/release", body)
     end
   end
 end
